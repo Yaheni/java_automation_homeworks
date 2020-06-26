@@ -1,19 +1,28 @@
 import java.util.concurrent.TimeUnit;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 
-
 public class FirstTest {
-    @Test
-    public void GoogleMailTest() {
+
+   public static WebDriver driver;
+
+
+    @BeforeAll
+    public static void SetUp() {
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().window().maximize();
+    }
+
+    @Test
+    public void GoogleMailTest()  {
 
         //Authorization through StackOverFlow
 
@@ -54,12 +63,11 @@ public class FirstTest {
             confirmDeleteSpamButton.click();
         }
 
-        driver.close();
     }
 
-    public void main(String[] args) {
-
-        GoogleMailTest();
-
+    @AfterAll
+    public static void shutDown(){
+        driver.quit();
     }
+
 }
